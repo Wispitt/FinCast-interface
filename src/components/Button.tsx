@@ -20,7 +20,7 @@ const Button = ({
 }: ButtonProps) => {
 
     const variantClasses = {
-        primary: "bg-primary-500 text-[#051626] font-semibold hover:bg-primary-600 active:-translate-y-1",
+        primary: "bg-primary-500 text-[#051626] font-semibold hover:bg-primary-600 hover:-translate-y-1 active:opacity-70",
         outline: "border border-primary-500 text-primary-500 hover:bg-primary-500/10",
         secondary: "bg-gray-800 text-white hover:bg-gray-700",
         success: "bg-green-500 text-[#051626] hover:brightness-90", danger: "bg-red-500 text-white hover:brightness-90",
@@ -38,7 +38,7 @@ const Button = ({
     return (
         <button
             type="button"
-            className={`cursor-pointer px-3 py-2 rounded-xl font-medium transition-all flex items-center justify-center 
+            className={`cursor-pointer px-3 py-2 rounded-xl font-medium transform transition-transform duration-400 ease-in-out flex items-center justify-center 
             ${variantClasses[variant]}
             ${isLoanding || disabled ? 'opacity-70 cursor-not-allowed' : ''}
             ${className}

@@ -15,8 +15,10 @@
     /* lighter */
     --color-gray-700: #1A2B3E;
     /* border */
-    --color-gray-400: #94A3B8;
+    --color-gray-500: #6a7282;
     /* text-muted */
+    --color-gray-400: #99a1af;
+
     --color-gray-50: #FFFFFF;
     /* text */
   
@@ -33,4 +35,24 @@
 
 body {
     @apply bg-gray-950 text-gray-50 min-h-screen font-sans
+}
+
+.container-app {
+    @apply cursor-pointer border-2 rounded-lg border-gray-600 h-40 flex justify-evenly items-center transform transition-transform duration-400 ease-in-out hover:-translate-y-1 shadow-md hover:shadow-lg hover:shadow-[#68b858];
+}
+
+.arrow-app {
+    @apply text-primary-500 text-2xl transition-transform duration-800 ease-in-out group-hover:translate-x-2;
+}
+
+.icons-app {
+    @apply text-primary-500 text-5xl border-b-2 border-t-2 px-3 rounded-xl;
+}
+
+.paragraph-app {
+    @apply mt-3 w-62 text-[13px] text-gray-400;
+}
+
+.title-app {
+    @apply font-bold text-white text-xl;
 }
