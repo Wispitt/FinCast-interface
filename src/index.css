@@ -3,6 +3,7 @@
 
 @theme {
     /* Cores do tema */
+    --color-primary-400: #02f182;
     --color-primary-500: #37E359;
     --color-primary-600: #2BC348;
     --color-primary-700: #228a36;
@@ -55,4 +56,18 @@ body {
 
 .title-app {
     @apply font-bold text-white text-xl;
+}
+
+.line-after-before {
+    @apply flex items-center gap-5
+  before:content-['']
+  before:block
+  before:h-px
+  before:flex-1
+  before:bg-gray-400
+  after:content-['']
+  after:block
+  after:h-px
+  after:flex-1
+  after:bg-gray-400;
 }

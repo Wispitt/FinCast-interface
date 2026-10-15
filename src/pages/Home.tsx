@@ -3,7 +3,6 @@ import Button from "../components/Button";
 import { IoChevronForward } from "react-icons/io5";
 import type { JSX } from "react/jsx-runtime";
 
-import backgroundEnd from '../assets/background-end.png';
 import mainImage from '../assets/main-image.png'
 
 interface Feature {
@@ -52,17 +51,17 @@ const Home = () => {
                         <div className="border-b-2 border-t-2 border-solid border-primary-500 text-primary-500  w-70 rounded-full h-9 text-sm flex justify-center items-center">
                             <span className="">SUAS FINANÇAS, SOB CONTROLE</span>
                         </div>
-                        <h2 className="my-4 text-5xl leading-13 text-white">Seu dinheiro, <span className="text-primary-500">suas escolhas.</span></h2>
+                        <h2 className="my-4 font-bold text-5xl leading-13 text-white">Seu dinheiro, <span className="text-primary-500">suas escolhas.</span></h2>
                         <p className="mb-6 text-sm max-w-140 text-wrap">O FinCast é seu aliado na gestão financeira.
                             Controle seus gastos,
                             acompanhe seus objetivos e construa um futuro mais estável.</p>
-                        <Button className="w-46 group ml-5">Começar agora <FaLongArrowAltRight className="ml-2 transition-transform duration-1000 ease-in-out group-hover:translate-x-1.5" /></Button>
+                        <Button className="w-46 rounded-3xl group ml-5">Começar agora <FaLongArrowAltRight className="ml-2 transition-transform duration-1000 ease-in-out group-hover:translate-x-1.5" /></Button>
                     </div>
                     <img className="max-w-120" src={mainImage} />
                 </section>
 
                 <div className="my-15 text-center flex flex-col items-center">
-                    <h3 className="text-3xl w-90 text-white">Tudo o que você precisa para <span className="text-primary-500">evoluir</span></h3>
+                    <h3 className="text-3xl font-bold w-90 text-white">Tudo o que você precisa para <span className="text-primary-500 font-extrabold">evoluir</span></h3>
                     <p className="mt-5 w-100 text-[14px] text-start text-gray-500">Ferramentas completas e intuitivas para você ter mais clareza, 
                         organização e tranquilidade com o seu dinheiro.</p>
                 </div>

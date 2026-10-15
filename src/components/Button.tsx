@@ -29,7 +29,7 @@ const Button = ({
     const renderLoading = () => {
         return (
             <div className="flex gap-1">
-                <svg className="size-4.5 mt-0.5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><linearGradient id="a17"><stop offset="0" stop-color="#051626" stop-opacity="0"></stop><stop offset="1" stop-color="#051626"></stop></linearGradient><circle fill="none" stroke="url(#a17)" stroke-width="30" stroke-linecap="round" stroke-dasharray="0 44 0 44 0 44 0 44 0 360" cx="100" cy="100" r="70" transform-origin="center"><animateTransform type="rotate" attributeName="transform" calcMode="discrete" dur="0.8" values="360;324;288;252;216;180;144;108;72;36" repeatCount="indefinite"></animateTransform></circle></svg>
+                <svg className="size-4.5 my-auto" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><linearGradient id="a17"><stop offset="0" stop-color="#051626" stop-opacity="0"></stop><stop offset="1" stop-color="#051626"></stop></linearGradient><circle fill="none" stroke="url(#a17)" stroke-width="30" stroke-linecap="round" stroke-dasharray="0 44 0 44 0 44 0 44 0 360" cx="100" cy="100" r="70" transform-origin="center"><animateTransform type="rotate" attributeName="transform" calcMode="discrete" dur="0.8" values="360;324;288;252;216;180;144;108;72;36" repeatCount="indefinite"></animateTransform></circle></svg>
                 Carregando
             </div>
         )
@@ -38,7 +38,7 @@ const Button = ({
     return (
         <button
             type="button"
-            className={`cursor-pointer px-3 py-2 rounded-xl font-medium transform transition-transform duration-400 ease-in-out flex items-center justify-center 
+            className={`cursor-pointer px-3 py-2 rounded-3xl font-medium transform transition-transform duration-400 ease-in-out flex items-center justify-center 
             ${variantClasses[variant]}
             ${isLoanding || disabled ? 'opacity-70 cursor-not-allowed' : ''}
             ${className}
