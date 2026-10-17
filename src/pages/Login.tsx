@@ -3,16 +3,26 @@ import { FaShieldHalved } from "react-icons/fa6";
 
 import GoogleLoginButton from "../components/GoogleLoginButton";
 import { useAuth } from "../hooks/AuthContext";
+import { useNavigate } from "react-router";
+import { useEffect } from "react";
 
 const Login = () => {
 
-    const { signWithGoogle } = useAuth()
+    const navigate = useNavigate();
+    
+    const { signWithGoogle, authState } = useAuth();
+    
+    useEffect(() => {
+        if(authState.user && !authState.loading) {
+            navigate('/dashboard');
+        }
+    }, [authState.user, authState.loading, navigate]);
 
     const handleLogin = async () => {
         try {
-            await signWithGoogle()
-        } catch (error) {
-            console.error({ error: error })
+            await signWithGoogle();
+        } catch (err) {
+            console.error('Error when logging in with Google', err);
         }
     }
 
@@ -37,8 +47,11 @@ const Login = () => {
                                 <p className="max-w-100 text-sm text-gray-400">Entre com o Google para continuar de forma rápida, segura e sem complicação.</p>
                             </div>
                         </div>
-                            <GoogleLoginButton onClick={handleLogin} isLoanding={false} className="my-6 h-13 text-[18px] font-medium group">Entrar com Google<FaArrowRight className="ml-2 text-1xl transition-transform duration-800 ease-in-out group-hover:translate-x-2" /></GoogleLoginButton>
-                        <div className="w-full text-center">
+                            <GoogleLoginButton onClick={handleLogin} isLoanding={false} className="mt-6 h-13 text-[18px] font-medium group">Entrar com Google<FaArrowRight className="ml-2 text-1xl transition-transform duration-800 ease-in-out group-hover:translate-x-2" /></GoogleLoginButton>
+                            {authState.error && (
+                                <p className="text-center text-red-700 leading-8 h-0"> {authState.error}Error no sistema</p>
+                            )}
+                        <div className="w-full text-center mt-6">
                             <span className="line-after-before">ou</span>
                         </div>
                         <div className="flex gap-4 items-center mt-5 ml-3">
@@ -49,7 +62,7 @@ const Login = () => {
                 </main>
             </div>
         </div>
-    )
-}
+    );
+};
 
 export default Login;

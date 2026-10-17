@@ -2,6 +2,7 @@ import { FaChartBar, FaHistory, FaLongArrowAltRight, FaRocket, FaTags, FaWallet 
 import Button from "../components/Button";
 import { IoChevronForward } from "react-icons/io5";
 import type { JSX } from "react/jsx-runtime";
+import { useNavigate } from "react-router";
 
 import mainImage from '../assets/main-image.png'
 
@@ -13,6 +14,8 @@ interface Feature {
 }
 
 const Home = () => {
+
+    const navigate = useNavigate();
 
     const features: ReadonlyArray<Feature> = [
     {
@@ -55,7 +58,7 @@ const Home = () => {
                         <p className="mb-6 text-sm max-w-140 text-wrap">O FinCast é seu aliado na gestão financeira.
                             Controle seus gastos,
                             acompanhe seus objetivos e construa um futuro mais estável.</p>
-                        <Button className="w-46 rounded-3xl group ml-5">Começar agora <FaLongArrowAltRight className="ml-2 transition-transform duration-1000 ease-in-out group-hover:translate-x-1.5" /></Button>
+                        <Button onClick={() => navigate('/login')} className="w-46 rounded-3xl group ml-5">Começar agora <FaLongArrowAltRight className="ml-2 transition-transform duration-1000 ease-in-out group-hover:translate-x-1.5" /></Button>
                     </div>
                     <img className="max-w-120" src={mainImage} />
                 </section>
@@ -86,7 +89,7 @@ const Home = () => {
                             <h3 className="text-xl font-bold text-white">Dê o próximo passo com a FinCast</h3>
                             <p className="w-80 text-[13px] text-gray-400 mt-2">Comece hoje mesmo a organizar suas finanças 
                                 e conquiste seus objetivos com mais facilidade.</p>
-                        <Button className="w-46 group mt-5">Criar conta<FaLongArrowAltRight className="ml-2 transition-transform duration-1000 ease-in-out group-hover:translate-x-1.5" /></Button>
+                        <Button onClick={() => navigate('/login')} className="w-46 group mt-5">Criar conta<FaLongArrowAltRight className="ml-2 transition-transform duration-1000 ease-in-out group-hover:translate-x-1.5" /></Button>
                         </div>
                     </div>
                 </section>
