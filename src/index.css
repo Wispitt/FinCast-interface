@@ -76,3 +76,17 @@ body {
 .icon-dashboard-card {
     @apply w-11 h-11 border-b-2 border-t-2 px-2 mx-3 mb-auto mt-7 rounded-xl;
 }
+
+@keyframes glow {
+    0% {
+        box-shadow: 0 0 5px rgba(55, 227, 89, 0.6);
+    }
+
+    100% {
+        box-shadow: 0 0 10px rgba(55, 297, 200, 0.8);
+    }
+}
+
+.glow {
+    animation: glow 2.5s ease-in-out infinite alternate;
+}

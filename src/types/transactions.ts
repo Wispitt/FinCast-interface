@@ -23,8 +23,14 @@ export interface TransactionFilter {
 };
 
 export interface TransactionsSummary {
-    totalExpense: number;
+    totalExpenses: number;
     totalIncomes: number;
     balance: number;
-    expensesBeCategory: CategorySummary[];
+    expensesByCategory: CategorySummary[];
+};
+
+export interface MonthlyItem {
+    name: string;
+    expenses: number;
+    income: number;
 };

@@ -33,6 +33,7 @@ export const AuthProvider = ({ children }: {children: ReactNode} ) => {
                     error: null,
                     loading: false,
                 })
+                console.log(user)
             } else {
                 setAuthState({
                     user: null,
