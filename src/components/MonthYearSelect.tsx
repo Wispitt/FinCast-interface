@@ -29,7 +29,7 @@ const MonthYearSelect = ({ month, onMonthChange, onYearChange, year }: MonthYear
     const years: number[] = Array.from({ length: 11}, (_, i) => currentYear - 5 + i)
 
     return (
-        <div className=" relative flex bg-[#031727] rounded-xl items-center h-10 w-60 pl-4 pr-1 justify-center ">
+        <div className="relative flex bg-[#031727] rounded-xl items-center h-10 w-60 pl-4 pr-1 justify-center ">
             <label htmlFor="month-select" className="sr-only">Selecionar mês</label>
             <LuCalendarDays className="text-2xl mr-2" />
             <select id="month-select"
