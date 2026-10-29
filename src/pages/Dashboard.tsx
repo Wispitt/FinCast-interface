@@ -28,8 +28,8 @@ import { Card } from "../components/Card";
 import { formateCurrency } from "../utils/formatters";
 import { currencyPorccentage } from "../utils/currencyPorcentage";
 import { RechartsDevtools } from "@recharts/devtools";
-import { BiLineChart } from "react-icons/bi";
 import { FaArrowUp } from "react-icons/fa";
+import Sidebar from "../components/SideBar";
 
 const initSummary: TransactionsSummary = {
     totalExpenses: 0,
@@ -90,16 +90,8 @@ const Dashboard = () => {
 
     return (
         <div className="flex">
-            {/* <section className="h-full w-100 border">
-                <div>
-                    <h2 className="text-3xl ml-10 text-primary-600">Dash<span className="text-primary-500">Board</span></h2>
-                </div>
-
-                <div className="border h-200">
-
-                </div>
-            </section> */}
-            <main className="py-7 px-40 max-[1000px]:px-10 w-full max-[500px]:px-3">
+            <Sidebar />
+            <main className="py-7 px-20 max-[1000px]:px-10 w-full max-[500px]:px-3">
                 <div className="flex flex-col w-full">
                     <div className="flex justify-between">
                         <div>
@@ -116,7 +108,7 @@ const Dashboard = () => {
                             icon={<LuWallet className="icon-dashboard-card text-primary-500" />}
                             title="Saldo Atual"
                             description="em relação ao mês anterior"
-                            porcentage={currencyPorccentage(PrevSummary.balance, summary.balance)}
+                            porcentage={currencyPorccentage(PrevSummary.balance, summary.balance) || '0'}
                         >
                             <h2 className={`my-2 text-xl
                                 ${summary.balance >= 0 ? 'text-primary-500' : 'text-red-800'}
@@ -130,7 +122,7 @@ const Dashboard = () => {
                             icon={<LuArrowDown className="icon-dashboard-card text-red-600" />}
                             title="Despesas"
                             description="em relação ao mês anterior"
-                            porcentage={currencyPorccentage(PrevSummary.totalExpenses * -1, summary.totalExpenses * -1)}
+                            porcentage={currencyPorccentage(PrevSummary.totalExpenses * -1, summary.totalExpenses * -1) || '0'}
                         >
                             <h2 className={`my-2 text-xl
                                 ${summary.totalExpenses < 0 ? 'text-primary-500' : 'text-red-800'}
@@ -144,7 +136,7 @@ const Dashboard = () => {
                             icon={<FaArrowUp className="icon-dashboard-card text-primary-600" />}
                             title="Receitas"
                             description="em relação ao mês anterior"
-                            porcentage={currencyPorccentage(PrevSummary.totalIncomes, summary.totalIncomes)}
+                            porcentage={currencyPorccentage(PrevSummary.totalIncomes, summary.totalIncomes) || '0'}
                         >
                             <h2 className={`my-2 text-xl
                                 ${summary.totalIncomes >= 0 ? 'text-primary-500' : 'text-red-800'}
