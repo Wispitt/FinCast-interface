@@ -182,7 +182,7 @@ const Dashboard = () => {
                                 ) : <div className="flex justify-center items-center h-full">
                                     <h2 className="text-xl font-medium text-[#00C9F2] opacity-70">NENHUMA DESPESA REGISTRADA NESSE MÊS</h2>
                                 </div>}
-                                <p className="text-center text-[#00C9F2] opacity-65 text-sm">Veja como suas despesas se comportaram neste mês.</p>
+                                <p className="text-center text-[#00C9F2] opacity-65 text-sm">Veja como suas despesas se comportaram neste mês</p>
                             </div>
                         </div>
                     </div>
@@ -234,7 +234,7 @@ const Dashboard = () => {
                                 ) : <div className="flex justify-center items-center h-full">
                                         <h2 className="text-xl font-medium text-[#00C9F2] opacity-70">NENHUM DADO REGISTRADO NESSE MÊS</h2>
                                     </div>}
-                                <p className="text-center text-[#00C9F2] opacity-65 text-sm">Veja como suas despesas se comportaram neste mês.</p>
+                                <p className="text-center text-[#00C9F2] opacity-65 text-sm">Veja como suas despesas se comportaram neste mês</p>
                             </div>
                         </div>
                     </div>

@@ -5,15 +5,16 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
     error?: string;
     id?: string;
     icon?: ReactNode;
+    fullWidth?: boolean;
 }
 
-const Input = ({ id, label, icon, className, error, ...rest }: InputProps) => {
+const Input = ({ id, label, icon, className, error, fullWidth, ...rest }: InputProps) => {
 
     const generatedId = useId()
     const inputId = id || generatedId;
 
     return (
-        <div className="relative">
+        <div className={`relative ${fullWidth ? 'w-full' : 'w-70' }`}>
             <div className={`flex items-center gap-3 border bg-[#04131f] h-10 rounded-xl pl-2 focus:ri
                 ${error ? 'border-red-600' : 'border-blue-600'}
             `}>
@@ -22,7 +23,7 @@ const Input = ({ id, label, icon, className, error, ...rest }: InputProps) => {
                         {label}
                     </label>
                 )}
-                <div className="text-gray-400 text-xl flex items-center ">
+                <div className="text-gray-400 text-xl flex items-center absolute r-">
                     {icon && (
                     <div>
                         {icon}
@@ -32,7 +33,7 @@ const Input = ({ id, label, icon, className, error, ...rest }: InputProps) => {
                 
                 <input 
                 id={inputId}
-                className={`focus:outline-none text-sm w-55 pr-3 transition-all py-2
+                className={`focus:outline-none text-sm w-full pr-3 transition-all py-2 pl-7
                 ${className}
                 `}
                 {...rest}

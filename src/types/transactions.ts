@@ -1,6 +1,9 @@
 import type { Category, CategorySummary } from "./category";
 
-export type TransactionType = "expense" | "income";
+export enum TransactionType  {
+    income = 'income',
+    expense = 'expense',
+}
 
 export interface Transaction {
     id: string;
