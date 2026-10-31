@@ -35,3 +35,10 @@ export const getTransactionsMonthly = async (
     });
     return reponse.data;
 }
+
+export const deleteTransactions = async (
+    id: string, 
+): Promise<void> => {
+    const reponse = await api.delete(`/transactions/${id}`);
+    return reponse.data;
+}

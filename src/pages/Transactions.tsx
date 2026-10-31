@@ -9,7 +9,10 @@ import { useEffect, useState } from "react";
 import Input from "../components/Input";
 import { FiAlertCircle } from "react-icons/fi";
 import { TransactionType, type Transaction } from "../types/transactions";
-import { getTransactions } from "../services/transactionService";
+import { deleteTransactions, getTransactions } from "../services/transactionService";
+import { formateCurrency, formateDate } from "../utils/formatters";
+import { BiTrash } from "react-icons/bi";
+import { toast } from "react-toastify";
 
 const Transactions = () => {
     
@@ -21,6 +24,7 @@ const Transactions = () => {
     const [loading, setLoanding] = useState<boolean>(false);
     const [error, setError] = useState<string>('');
     const [transactions, setTransactions] = useState<Transaction[]>([]);
+    const [deletingId, setDeletingId] = useState<string>('');
 
     const fetchTransactions = async (month: number, year: number): Promise<void> => {
             try {
@@ -29,12 +33,33 @@ const Transactions = () => {
 
                 const data = await getTransactions({month, year})
                 setTransactions(data);
+                console.log(data)
             } catch {
                 setError('Não foi possível carregar as transações, tente novamente');
             } finally {
                 setLoanding(false);
             }
         };
+
+    const handleDelete = async (id: string): Promise<void> => {
+        try {
+            setDeletingId(id);
+            await deleteTransactions(id);
+            toast.success('Transação deletada com sucesso');
+            setTransactions((prev) => prev.filter((t) => t.id !== id ));
+        } catch (err) {
+            console.error(err);
+            toast.error('Falha ao deletar Transação');
+        } finally {
+            setDeletingId('');
+        }
+    };
+
+    const confirmDelete = (id: string): void => {
+        if(window.confirm('Tem certeza que deseja deletar essa transação?')) {
+            handleDelete(id);
+        }
+    };
 
     useEffect(() => {
         // eslint-disable-next-line react-hooks/set-state-in-effect
@@ -109,7 +134,7 @@ const Transactions = () => {
                         </div>
                     </section>
 
-                    <section className="border border-[#075985] rounded-2xl bg-[#031727] h-100">
+                    <section className="border border-[#075985] rounded-2xl bg-[#031727] h-100 overflow-y-scroll [&::-webkit-scrollbar]:w-0">
                         {loading ? (
                             <div className="h-full flex justify-center items-center">
                                 <div className="flex flex-col items-center justify-center gap-3" />
@@ -130,36 +155,36 @@ const Transactions = () => {
                             </div>
                         ) : 
                         <div className="overflow-x-auto">
-                            <table className="divide-y divide-gray-700 min-h-full">
+                            <table className="divide-y divide-gray-700 min-h-full w-full">
                                 <thead>
                                     <tr>
                                         <th 
                                         scope="col" 
-                                        className="px-3 py-3 text-left text-xs font-medium text-gray-400 uppercase">
+                                        className="px-4 py-3 text-left text-sm font-medium text-gray-400 uppercase">
                                         Descrição
                                         </th>
 
                                         <th 
                                         scope="col" 
-                                        className="px-3 py-3 text-left text-xs font-medium text-gray-400 uppercase">
+                                        className="px-2 py-3 text-left text-sm font-medium text-gray-400 uppercase">
                                         Data
                                         </th>
 
                                         <th 
                                         scope="col" 
-                                        className="px-3 py-3 text-left text-xs font-medium text-gray-400 uppercase">
+                                        className="px-2 py-3 text-left text-sm font-medium text-gray-400 uppercase">
                                         Categoria
                                         </th>
 
                                         <th 
                                         scope="col" 
-                                        className="px-3 py-3 text-left text-xs font-medium text-gray-400 uppercase">
+                                        className="px-2 py-3 text-left text-sm font-medium text-gray-400 uppercase">
                                         valor
                                         </th>
 
                                         <th 
                                         scope="col" 
-                                        className="px-3 py-3 text-left text-xs font-medium text-gray-400 uppercase">
+                                        className="px-2 py-3 text-left text-sm font-medium text-gray-400 uppercase">
                                         {' '}
                                         </th>
                                     </tr>
@@ -168,16 +193,56 @@ const Transactions = () => {
                                 <tbody className="divide-y divide-gray-700">
                                     {transactions.map((transaction) => (
                                         <tr key={transaction.id} className="hover:bg-gray-800">
-                                            <td className="">
-                                                <div>
-                                                    <div>
+                                            <td className="px-2 py-4 text-sm text-gray-400 whitespace-nowrap">
+                                                <div className="flex items-center">
+                                                    <div className="px-2">
                                                         {transaction.type === TransactionType.income ? (
-                                                            <FaArrowUp className="text-sm text-primary-500" />
+                                                            <FaArrowUp className="text-[13px] text-primary-500" />
                                                         ) : (
-                                                            <LuArrowDown className="text-sm text-red-600" />
+                                                            <LuArrowDown className="text-[14px] text-red-600" />
                                                         )}
                                                     </div>
+                                                    <span className="text-sm font-medium text-gray-200">
+                                                        {transaction.description}
+                                                    </span>
                                                 </div>
+                                            </td>
+
+                                            <td className="px-2 py-4 text-sm whitespace-nowrap">
+                                                {formateDate(transaction.date)}
+                                            </td>
+
+                                            <td className="px-2 py-4 text-sm whitespace-nowrap">
+                                                <div className="flex items-center">
+                                                    <div className="w-2 h-2 rounded-full mr-2" 
+                                                    style={{ backgroundColor: transaction.category.color }} 
+                                                    />
+                                                    <span className="text-sm">
+                                                        {transaction.category.name}
+                                                    </span>
+                                                </div>
+                                            </td>
+
+                                            <td className="px-2 py-4 text-sm whitespace-nowrap">
+                                                <span className={`${transaction.type === TransactionType.income ? 'text-primary-500' : 'text-red-600' }`}>
+                                                    {formateCurrency(transaction.amount)}
+                                                </span>
+                                            </td>
+
+                                            <td className=" py-4 text-sm whitespace-nowrap">
+                                                <button
+                                                type="button"
+                                                onClick={() => confirmDelete(transaction.id)}
+                                                className="hover:text-red-600 rounded-full"
+                                                disabled={deletingId === transaction.id}
+                                                >
+                                                {deletingId === transaction.id ? (
+                                                    <span className="inline-block w-4 h-4 border-2 ml-0.5 border-red-600 border-t-transparent rounded-full animate-spin" 
+                                                    />
+                                                ): (
+                                                    <BiTrash className="text-xl cursor-pointer" />
+                                                )}
+                                                </button>
                                             </td>
                                         </tr>
                                     ))}

@@ -26,7 +26,7 @@ import type { MonthlyItem, TransactionsSummary } from "../types/transactions";
 import { getTransactionsMonthly, getTransactionsSummary } from "../services/transactionService";
 import { Card } from "../components/Card";
 import { formateCurrency } from "../utils/formatters";
-import { currencyPorccentage } from "../utils/currencyPorcentage";
+import { currencyPorccentage } from "../utils/formatters";
 import { RechartsDevtools } from "@recharts/devtools";
 import { FaArrowUp } from "react-icons/fa";
 import Sidebar from "../components/SideBar";
@@ -148,16 +148,16 @@ const Dashboard = () => {
                 </div>
 
                 <div className="mt-10 flex max-[1600px]:flex-col-reverse gap-4 ">
-                    <div className="flex flex-col w-full max-w-150 h-130 gap-4">
+                    <div className="flex flex-col w-full max-w-150">
                         <div className="w-full max-w-150 h-full max-h-110 rounded-2xl bg-[#031727] p-5 pt-0  max-[500px]:p-0  max-[500px]:pt-10">
 
-                            <div className="w-full h-95 px-0.5 max-[500px]:h-90">
+                            <div className="w-full h-full px-0.5 relative max-[500px]:h-90">
                                 <div className="flex justify-center items-center mb-5 gap-2">
                                     <LuTarget className="icon-dashboard-card text-[#00C9F2]" />
                                     <h3 className="mt-7 text-primary-500 text-xl">Despesas por categoria</h3>
                                 </div>
                                 {summary.expensesByCategory.length > 0 ? (
-                                    <ResponsiveContainer width="100%" height="60%">
+                                    <ResponsiveContainer width="100%" height="80%">
                                         <PieChart>
                                             <Pie
                                                 data={(summary.expensesByCategory ?? []).map((entry) => ({
@@ -179,10 +179,10 @@ const Dashboard = () => {
                                         </PieChart>
                                     </ResponsiveContainer>
 
-                                ) : <div className="flex justify-center items-center h-full">
-                                    <h2 className="text-xl font-medium text-[#00C9F2] opacity-70">NENHUMA DESPESA REGISTRADA NESSE MÊS</h2>
+                                ) : <div className="flex justify-center items-center h-60">
+                                    <h2 className="text-lg font-medium text-[#00C9F2] opacity-70">NENHUMA DESPESA REGISTRADA NESSE MÊS</h2>
                                 </div>}
-                                <p className="text-center text-[#00C9F2] opacity-65 text-sm">Veja como suas despesas se comportaram neste mês</p>
+                                <p className="text-center w-full text-[#00C9F2] opacity-65 text-xs absolute bottom-0">Veja como suas despesas se comportaram neste mês</p>
                             </div>
                         </div>
                     </div>
@@ -234,7 +234,7 @@ const Dashboard = () => {
                                 ) : <div className="flex justify-center items-center h-full">
                                         <h2 className="text-xl font-medium text-[#00C9F2] opacity-70">NENHUM DADO REGISTRADO NESSE MÊS</h2>
                                     </div>}
-                                <p className="text-center text-[#00C9F2] opacity-65 text-sm">Veja como suas despesas se comportaram neste mês</p>
+                                <p className="text-center text-[#00C9F2] opacity-65 text-xs">Veja como suas despesas se comportaram neste mês</p>
                             </div>
                         </div>
                     </div>

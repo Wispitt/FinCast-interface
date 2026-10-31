@@ -2,9 +2,12 @@ import { LuArrowLeftRight, LuHouse, LuPlus, LuTags, LuTrendingUp } from "react-i
 import { Link } from "react-router";
 
 const Sidebar = () => {
+
+    
+
     return (
         <div className="border-r border-blue-600 w-70">
-            <main className="flex flex-col gap-5 pl-2 py-5">
+            <main className="flex flex-col gap-5 px-2 py-5">
                 <div className="flex justify-center items-center w-full">
                     <h3 className="text-center flex items-center text-2xl text-primary-600"><LuTrendingUp className="text-2xl text-primary-600" /> FinCast</h3>
                 </div>
