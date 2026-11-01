@@ -1,20 +1,7 @@
 import { useEffect, useState } from "react";
-import { Pie, ResponsiveContainer, PieChart, Tooltip, LineChart, CartesianGrid, XAxis, YAxis, Legend, Bar, Line } from "recharts";
+import { Pie, ResponsiveContainer, PieChart, Tooltip, LineChart, CartesianGrid, XAxis, YAxis, Legend, Line } from "recharts";
 import {
-    LuHouse,
-    LuChartNoAxesColumnIncreasing,
-    LuLayoutGrid,
-    LuHistory,
     LuUserRound,
-    LuChartNoAxesCombined,
-    LuArrowRight,
-    LuRocket,
-    LuUtensils,
-    LuCarFront,
-    LuGamepad2,
-    LuShoppingBag,
-    LuPackage,
-    LuReceiptText,
     LuWallet,
     LuArrowDown,
     LuTrendingUp,
@@ -30,6 +17,7 @@ import { currencyPorccentage } from "../utils/formatters";
 import { RechartsDevtools } from "@recharts/devtools";
 import { FaArrowUp } from "react-icons/fa";
 import Sidebar from "../components/SideBar";
+import { useLocation } from "react-router";
 
 const initSummary: TransactionsSummary = {
     totalExpenses: 0,
@@ -37,12 +25,10 @@ const initSummary: TransactionsSummary = {
     balance: 0,
     expensesByCategory: [],
 };
-
 interface ChartLabelProps {
     categoryName?: string;
     percent?: number;
 };
-
 
 const Dashboard = () => {
     const currentDate = new Date();
@@ -52,11 +38,12 @@ const Dashboard = () => {
     const [PrevSummary, setPrevSummary] = useState<TransactionsSummary>(initSummary);
     const [monthlyItemsData, setMonthlyItemsData] = useState<MonthlyItem[]>([])
 
+    const location = useLocation();
+
     useEffect(() => {
         async function loadTransactionsSummary(): Promise<void> {
             const response = await getTransactionsSummary(month, year);
             setSummary(response)
-            console.log(response)
         };
 
         loadTransactionsSummary();
@@ -66,7 +53,6 @@ const Dashboard = () => {
         async function loadTransactionsPrevDate(): Promise<void> {
             const response = await getTransactionsSummary(month - 1, year);
             setPrevSummary(response);
-            console.log(response)
         };
         loadTransactionsPrevDate();
     }, [month, year]);
@@ -75,7 +61,6 @@ const Dashboard = () => {
         async function getTransactionsMonthtly(): Promise<void> {
             const response = await getTransactionsMonthly(month, year, 8);
             setMonthlyItemsData(response.history);
-            console.log(response)
         };
         getTransactionsMonthtly();
     }, [month, year]);
@@ -90,7 +75,7 @@ const Dashboard = () => {
 
     return (
         <div className="flex">
-            <Sidebar />
+            <Sidebar urlLocation={location.pathname} />
             <main className="py-7 px-20 max-[1000px]:px-10 w-full max-[500px]:px-3">
                 <div className="flex flex-col w-full">
                     <div className="flex justify-between">

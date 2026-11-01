@@ -39,7 +39,7 @@ interface TransactionsMonth {
     //     },
     //   ];
 
-export const Card = ({ children, icon, porcentage = '0', title, description, className, glowEffect = false, hover = false }: Partial<TransactionsMonth>) => {
+export const Card = ({ children, icon, porcentage = ' ', title, description, className, glowEffect = false, hover = false }: Partial<TransactionsMonth>) => {
     
     return (
         <div className="mt-5 flex gap-4 h-37 w-full max-w-80 justify-center">

@@ -1,18 +1,25 @@
-import { LuArrowDown, LuArrowLeftRight, LuChevronLeft, LuChevronRight, LuPlus, LuSearch, LuWallet } from "react-icons/lu";
+import { LuArrowDown, LuArrowLeftRight, LuPlus, LuSearch, LuWallet } from "react-icons/lu";
 import Button from "../components/Button";
 import { Card } from "../components/Card";
 import MonthYearSelect from "../components/MonthYearSelect";
 import { FaArrowUp } from "react-icons/fa";
 import Sidebar from "../components/SideBar";
-import { useNavigate } from "react-router";
-import { useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router";
+import { useEffect, useState, type ChangeEvent } from "react";
 import Input from "../components/Input";
 import { FiAlertCircle } from "react-icons/fi";
-import { TransactionType, type Transaction } from "../types/transactions";
-import { deleteTransactions, getTransactions } from "../services/transactionService";
+import { TransactionType, type Transaction, type TransactionsSummary } from "../types/transactions";
+import { deleteTransactions, getTransactions, getTransactionsSummary } from "../services/transactionService";
 import { formateCurrency, formateDate } from "../utils/formatters";
 import { BiTrash } from "react-icons/bi";
 import { toast } from "react-toastify";
+
+const initSummary: TransactionsSummary = {
+    totalExpenses: 0,
+    totalIncomes: 0,
+    balance: 0,
+    expensesByCategory: [],
+};
 
 const Transactions = () => {
     
@@ -23,8 +30,13 @@ const Transactions = () => {
     const [month, setMonth] = useState<number>(currentDate.getMonth() + 1);
     const [loading, setLoanding] = useState<boolean>(false);
     const [error, setError] = useState<string>('');
+    const [transactionsFiltered, setTransactionsFiltered] = useState<Transaction[]>([]);
     const [transactions, setTransactions] = useState<Transaction[]>([]);
     const [deletingId, setDeletingId] = useState<string>('');
+    const [searchText, setSearchText] = useState<string>('');
+    const [summary, setSummary] = useState<TransactionsSummary>(initSummary);
+
+    const location = useLocation();
 
     const fetchTransactions = async (month: number, year: number): Promise<void> => {
             try {
@@ -33,13 +45,27 @@ const Transactions = () => {
 
                 const data = await getTransactions({month, year})
                 setTransactions(data);
-                console.log(data)
+                setTransactionsFiltered(data);
             } catch {
                 setError('Não foi possível carregar as transações, tente novamente');
             } finally {
                 setLoanding(false);
             }
         };
+
+        useEffect(() => {
+            // eslint-disable-next-line react-hooks/set-state-in-effect
+            fetchTransactions(month, year);
+        }, [month, year]);
+
+        useEffect(() => {
+                async function loadTransactionsSummary(): Promise<void> {
+                    const response = await getTransactionsSummary(month, year);
+                    setSummary(response)
+                };
+        
+                loadTransactionsSummary();
+            }, [month, year]);
 
     const handleDelete = async (id: string): Promise<void> => {
         try {
@@ -61,14 +87,15 @@ const Transactions = () => {
         }
     };
 
-    useEffect(() => {
-        // eslint-disable-next-line react-hooks/set-state-in-effect
-        fetchTransactions(month, year);
-    }, [month, year])
+    const handleSearchChange = (event: ChangeEvent<HTMLInputElement>): void => {
+        setSearchText(event.target.value);
+        setTransactionsFiltered(transactions.filter((transaction
+        ) => transaction.description.toUpperCase().includes(event.target.value.toUpperCase())))
+    };
 
     return (
         <div className="max-w-470 flex">
-                <Sidebar />
+                <Sidebar urlLocation={location.pathname} />
             <div className="flex flex-col w-full items-center p-7">
                 <main className="flex flex-col w-full gap-7">
                     <section className="flex justify-between ml-7">
@@ -84,53 +111,62 @@ const Transactions = () => {
                         </div>
                     </section>
 
-                    <section className="flex gap-4">
+                    <section className="flex gap-4 justify-center">
                         <Card hover
                             icon={<LuWallet className="icon-dashboard-card text-primary-500" />}
                             title="Saldo Atual"
-                            porcentage=" "
-                            className="h-30"
+                            className="h-30 justify-start gap-5 px-10"
                         >
-                            <h2 className='my-2 text-xl'>1</h2>
+                            <h2 className={`my-2 text-xl
+                                ${summary.balance >= 0 ? 'text-primary-500' : 'text-red-800'}
+                                `}>
+                                {formateCurrency(summary.balance)}
+                            </h2>
                         </Card>
 
                         <Card hover
                             icon={<LuArrowDown className="icon-dashboard-card text-red-600" />}
                             title="Despesas"
-                            porcentage=" "
-                            className="h-30"
+                            className="h-30 justify-start gap-5 px-10"
                         >
-                            <h2 className='my-2 text-xl'>
-                                1
+                            <h2 className={`my-2 text-xl
+                                ${summary.totalExpenses < 0 ? 'text-primary-500' : 'text-red-800'}
+                                `}>
+                                {formateCurrency(summary.totalExpenses)}
                             </h2>
                         </Card>
 
                         <Card hover
                             icon={<FaArrowUp className="icon-dashboard-card text-primary-600" />}
                             title="Receitas"
-                            porcentage=" "
-                            className="h-30"
+                            className="h-30 justify-start gap-5 px-10"
                         >
-                            <h2 className='my-2 text-xl'>
-                                1
+                            <h2 className={`my-2 text-xl
+                                ${summary.totalIncomes >= 0 ? 'text-primary-500' : 'text-red-800'}
+                                `}>
+                                {formateCurrency(summary.totalIncomes)}
                             </h2>
                         </Card>
                     </section>
 
                     <section className="flex justify-between border border-[#075985] bg-[#031727] h-22 rounded-2xl pl-10 pr-3 items-center">
                         <div className="flex items-center gap-3">
-                            <LuChevronLeft className="border text-3xl h-12 w-10 p-2 cursor-pointer rounded-lg border-[#075985] bg-[#031727]" />
-                            <div className="border p-1 rounded-2xl border-[#075985] bg-[#031727]">
+                            <div className="ml-9">
                                 <MonthYearSelect 
                                 month={month} 
                                 onMonthChange={setMonth} 
                                 onYearChange={setYear} 
                                 year={year} />
                             </div>
-                            <LuChevronRight className="border text-3xl h-12 w-10 p-2 cursor-pointer rounded-lg border-[#075985] bg-[#031727]" />
                         </div>
-                        <div>
-                            <Input placeholder='Buscar transações...' icon={<LuSearch />}  />
+                        <div className="w-90">
+                            <Input 
+                            fullWidth
+                            placeholder='Buscar transações...' 
+                            icon={<LuSearch />} 
+                            onChange={handleSearchChange}
+                            value={searchText}
+                            />
                         </div>
                     </section>
 
@@ -191,7 +227,7 @@ const Transactions = () => {
                                 </thead>
 
                                 <tbody className="divide-y divide-gray-700">
-                                    {transactions.map((transaction) => (
+                                    {transactionsFiltered.map((transaction) => (
                                         <tr key={transaction.id} className="hover:bg-gray-800">
                                             <td className="px-2 py-4 text-sm text-gray-400 whitespace-nowrap">
                                                 <div className="flex items-center">

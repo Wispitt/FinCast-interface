@@ -1,9 +1,15 @@
 import { LuArrowLeftRight, LuHouse, LuPlus, LuTags, LuTrendingUp } from "react-icons/lu";
 import { Link } from "react-router";
 
-const Sidebar = () => {
+interface SidebarProps {
+  urlLocation: string;
+}
 
-    
+const Sidebar = ({ urlLocation }: SidebarProps) => {
+
+  const isDashboard = urlLocation === "/dashboard";
+  const isTransactions = urlLocation === "/transacoes";
+  const isTransactionsNova = urlLocation === "/transacoes/nova";
 
     return (
         <div className="border-r border-blue-600 w-70">
@@ -13,9 +19,21 @@ const Sidebar = () => {
                 </div>
 
                 <div className="flex flex-col gap-3 text-blue-600 ">
-                    <Link to='/dashboard' className="flex items-center h-10 hover:bg-blue-400 hover:opacity-90 hover:border hover:rounded-2xl cursor-pointer text-xl max-[862px]:text-sm font-bold px-2"><LuHouse className="mr-2" /> Dashboard</Link>
-                    <Link to='/transacoes' className="flex items-center h-10 hover:bg-blue-400 hover:opacity-90 hover:border hover:rounded-2xl cursor-pointer text-xl max-[862px]:text-sm font-bold px-2"><LuArrowLeftRight className="mr-2" /> Transações</Link>
-                    <Link to='/transacoes/nova' className="flex items-center h-10 hover:bg-blue-400 hover:opacity-90 hover:border hover:rounded-2xl cursor-pointer text-xl max-[862px]:text-sm font-bold px-2"><LuPlus className="mr-1 text-xl font-bold" /> Nova transação</Link>
+                    <Link 
+                    to='/dashboard' 
+                    className={`flex items-center h-10 hover:bg-blue-400 hover:opacity-90 hover:border hover:rounded-2xl cursor-pointer text-xl max-[862px]:text-sm font-bold px-2
+                        ${isDashboard  ? 'bg-blue-400 opacity-90 border rounded-2xl' : ''}
+                    `}
+                    ><LuHouse className="mr-2" /> Dashboard</Link>
+
+                    <Link to='/transacoes' className={`flex items-center h-10 hover:bg-blue-400 hover:opacity-90 hover:border hover:rounded-2xl cursor-pointer text-xl max-[862px]:text-sm font-bold px-2
+                        ${isTransactions  ? 'bg-blue-400 opacity-90 border rounded-2xl' : ''}
+                    `}><LuArrowLeftRight className="mr-2" /> Transações</Link>
+
+                    <Link to='/transacoes/nova' className={`flex items-center h-10 hover:bg-blue-400 hover:opacity-90 hover:border hover:rounded-2xl cursor-pointer text-xl max-[862px]:text-sm font-bold px-2
+                        ${isTransactionsNova  ? 'bg-blue-400 opacity-90 border rounded-2xl' : ''}
+                    `}><LuPlus className="mr-1 text-xl font-bold" /> Nova transação</Link>
+
                     <button className="flex items-center h-10 hover:bg-blue-400 hover:opacity-90 hover:border hover:rounded-2xl cursor-pointer text-xl max-[862px]:text-sm font-bold px-2"><LuTags className="mr-2" /> Categorias</button>
                 </div>
 
