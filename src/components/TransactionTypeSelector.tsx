@@ -1,3 +1,4 @@
+import { FaArrowDown, FaArrowUp } from "react-icons/fa";
 import { TransactionType } from "../types/transactions";
 
 interface TransactionTypeSelectorProps {
@@ -10,32 +11,32 @@ const TransactionTypeSelector = ({ value, onChange, id }: TransactionTypeSelecto
     const transactionsTypeButtons = [
         {
             type: TransactionType.expense,
+            icon: <FaArrowDown className="text-xl" />,
             label: 'Despesa',
-            activeClasses: 'bg-red-500 border-red-500 text-red-700 font-medium',
-            inativeClasses: 'bg-tranparent border-red-300 text-red-500 hover:bg-red-500 hover:text-red-600 hover:border-red-500',
+            activeClasses: 'bg-red-500 border-red-600 text-red-700 font-medium',
+            inativeClasses: 'bg-tranparent border-red-400 text-red-500 hover:bg-red-500 hover:text-red-600 hover:border-red-500',
         },
         {
             type: TransactionType.income,
+            icon: <FaArrowUp className="text-xl" />,
             label: 'Receita',
-            activeClasses: 'bg-green-100 border-green-500 text-green-700 font-medium',
-            inativeClasses: 'bg-tranparent border-green-300 text-green-500 hover:bg-green-500 hover:text-green-600 hover:border-green-500',
+            activeClasses: 'bg-green-500 border-green-500 text-green-700 font-medium',
+            inativeClasses: 'bg-tranparent border-green-600 text-green-700 hover:bg-green-500 hover:text-green-600 hover:border-green-500',
         },
     ]
 
     return (
         <fieldset id={id} className="grid grid-cols-2 gap-2">
-            <legend>Tipo de Transação</legend>
-
             {transactionsTypeButtons.map((item) => (
                 <button 
                 key={item.type} 
                 type="button"
                 onClick={() => onChange(item.type)}
-                className={`cursor-pointer flex items-center justify-center border rounded-md px-4 py-2 transition-all text-sm 
+                className={`cursor-pointer flex items-center justify-center border rounded-xl px-4 py-2 gap-2 transition-all text-lg 
                     ${value === item.type ? item.activeClasses : item.inativeClasses}`}
                 
                 >
-                    {item.label}
+                  {item.icon}  {item.label}
                 </button>
             ))}
         </fieldset>

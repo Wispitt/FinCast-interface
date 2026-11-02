@@ -166,6 +166,7 @@ const Transactions = () => {
                             icon={<LuSearch />} 
                             onChange={handleSearchChange}
                             value={searchText}
+                            className="pl-7"
                             />
                         </div>
                     </section>

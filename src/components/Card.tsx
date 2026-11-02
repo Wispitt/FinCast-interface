@@ -15,30 +15,6 @@ interface TransactionsMonth {
         children?: ReactNode;
     }
 
-    // const transactions: ReadonlyArray<TransactionsMonth> = [
-    //     {
-    //       icon: <LuWallet className="icon-dashboard-card text-primary-500 border" />,
-    //       title: "Saldo Atual",
-    //       desccription: " em relação ao mês anterior"
-    //     },
-    //     {
-    //       icon: <LuArrowDown className="icon-dashboard-card text-red-600 border" />,
-    //       title: "Despesas",
-    //       desccription: "↑ +8,2% em relação ao mês anterior"
-
-    //     },
-    //     {
-    //       icon: <LuTrendingUp className="icon-dashboard-card text-primary-700 border" />,
-    //       title: "Receitas",
-    //       desccription: "↑ +5,6% em relação ao mês anterior"
-    //     },
-    //     {
-    //       icon: <LuTarget className="icon-dashboard-card text-[#00C9F2] border" />,
-    //       title: "Meta do Mês",
-    //       desccription: "48%"
-    //     },
-    //   ];
-
 export const Card = ({ children, icon, porcentage = ' ', title, description, className, glowEffect = false, hover = false }: Partial<TransactionsMonth>) => {
     
     return (

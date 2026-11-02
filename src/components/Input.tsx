@@ -19,11 +19,11 @@ const Input = ({ id, label, icon, className, error, fullWidth, ...rest }: InputP
                 ${error ? 'border-red-600' : 'border-blue-600'}
             `}>
                 {label && (
-                    <label htmlFor={inputId} className="block text-sm font-medium text-gray-400 mb-2">
+                    <label htmlFor={inputId} className="block text-sm font-medium text-gray-400">
                         {label}
                     </label>
                 )}
-                <div className="text-gray-400 text-xl flex items-center absolute r-">
+                <div className="text-gray-400 text-xl flex items-center absolute">
                     {icon && (
                     <div>
                         {icon}
@@ -33,7 +33,7 @@ const Input = ({ id, label, icon, className, error, fullWidth, ...rest }: InputP
                 
                 <input 
                 id={inputId}
-                className={`focus:outline-none text-sm w-full pr-3 transition-all py-2 pl-7
+                className={`focus:outline-none text-sm w-full pr-3 transition-all py-2
                 ${className}
                 `}
                 {...rest}

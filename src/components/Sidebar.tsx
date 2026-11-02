@@ -1,15 +1,20 @@
+import { useState } from "react";
 import { LuArrowLeftRight, LuHouse, LuPlus, LuTags, LuTrendingUp } from "react-icons/lu";
 import { Link } from "react-router";
+import TransactionsForm from "./TransactionsForm";
 
 interface SidebarProps {
   urlLocation: string;
 }
 
 const Sidebar = ({ urlLocation }: SidebarProps) => {
+    const [isActive, setIsActive] = useState<boolean>(false);
 
-  const isDashboard = urlLocation === "/dashboard";
-  const isTransactions = urlLocation === "/transacoes";
-  const isTransactionsNova = urlLocation === "/transacoes/nova";
+    const isDashboard = urlLocation === "/dashboard";
+    const isTransactions = urlLocation === "/transacoes";
+    const isTransactionsNova = urlLocation === "/transacoes/nova";
+
+    const handleActive = () => setIsActive(!isActive)
 
     return (
         <div className="border-r border-blue-600 w-70">
@@ -30,9 +35,9 @@ const Sidebar = ({ urlLocation }: SidebarProps) => {
                         ${isTransactions  ? 'bg-blue-400 opacity-90 border rounded-2xl' : ''}
                     `}><LuArrowLeftRight className="mr-2" /> Transações</Link>
 
-                    <Link to='/transacoes/nova' className={`flex items-center h-10 hover:bg-blue-400 hover:opacity-90 hover:border hover:rounded-2xl cursor-pointer text-xl max-[862px]:text-sm font-bold px-2
+                    <button onClick={handleActive} className={`flex items-center h-10 hover:bg-blue-400 hover:opacity-90 hover:border hover:rounded-2xl cursor-pointer text-xl max-[862px]:text-sm font-bold px-2
                         ${isTransactionsNova  ? 'bg-blue-400 opacity-90 border rounded-2xl' : ''}
-                    `}><LuPlus className="mr-1 text-xl font-bold" /> Nova transação</Link>
+                    `}><LuPlus className="mr-1 text-xl font-bold" /> Nova transação</button>
 
                     <button className="flex items-center h-10 hover:bg-blue-400 hover:opacity-90 hover:border hover:rounded-2xl cursor-pointer text-xl max-[862px]:text-sm font-bold px-2"><LuTags className="mr-2" /> Categorias</button>
                 </div>
@@ -41,6 +46,7 @@ const Sidebar = ({ urlLocation }: SidebarProps) => {
 
                 </div>
             </main>
+            {isActive && <TransactionsForm isActive={isActive} />}
         </div>
     );
 };
