@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from "react-router";
+import { BrowserRouter, Link, Route, Routes } from "react-router";
 
 import Home from "../pages/Home";
 import Login from "../pages/Login";
@@ -37,7 +37,13 @@ const AppRoutes = () => {
                         </Route>
                     </Route>
 
-                    <Route path="*" element={<h1>Página não encontrada</h1>} />
+                    <Route path="*" element={
+                    <div className="w-full h-[99vh] flex justify-center items-center">
+                        <div className="flex flex-col gap-4 p-3 border-2 border-[#075985] rounded-2xl w-full max-w-120">
+                            <h1 className="text-2xl text-center text-primary-600 font-bold">Página não encontrada</h1>
+                            <Link className="h-10 p-3 border border-[#075985] rounded-2xl flex justify-center items-center text-xl text-[#00C9F2] hover:opacity-80" to='/dashboard'>Ir para home</Link>
+                        </div>
+                    </div>} />
                 </Routes>
                 <ToastContainer {...toastConfig} />
             </AuthProvider>

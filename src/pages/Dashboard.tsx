@@ -76,7 +76,7 @@ const Dashboard = () => {
     return (
         <div className="flex">
             <Sidebar urlLocation={location.pathname} />
-            <main className="py-7 px-20 max-[1000px]:px-10 w-full max-[500px]:px-3">
+            <main className="py-7 px-10 w-full max-[500px]:px-3">
                 <div className="flex flex-col w-full">
                     <div className="flex justify-between">
                         <div>

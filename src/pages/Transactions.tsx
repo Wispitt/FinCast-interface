@@ -4,7 +4,7 @@ import { Card } from "../components/Card";
 import MonthYearSelect from "../components/MonthYearSelect";
 import { FaArrowUp } from "react-icons/fa";
 import Sidebar from "../components/SideBar";
-import { useLocation, useNavigate } from "react-router";
+import { useLocation } from "react-router";
 import { useEffect, useState, type ChangeEvent } from "react";
 import Input from "../components/Input";
 import { FiAlertCircle } from "react-icons/fi";
@@ -13,6 +13,7 @@ import { deleteTransactions, getTransactions, getTransactionsSummary } from "../
 import { formateCurrency, formateDate } from "../utils/formatters";
 import { BiTrash } from "react-icons/bi";
 import { toast } from "react-toastify";
+import TransactionsForm from "../components/TransactionsForm";
 
 const initSummary: TransactionsSummary = {
     totalExpenses: 0,
@@ -22,8 +23,6 @@ const initSummary: TransactionsSummary = {
 };
 
 const Transactions = () => {
-    
-    const navigate = useNavigate();
 
     const currentDate = new Date();
     const [year, setYear] = useState<number>(currentDate.getFullYear());
@@ -35,8 +34,13 @@ const Transactions = () => {
     const [deletingId, setDeletingId] = useState<string>('');
     const [searchText, setSearchText] = useState<string>('');
     const [summary, setSummary] = useState<TransactionsSummary>(initSummary);
+    const [isActive, setIsActive] = useState<boolean>(false);
 
     const location = useLocation();
+
+    const handleButton = () => {
+        setIsActive(!isActive);
+    };
 
     const fetchTransactions = async (month: number, year: number): Promise<void> => {
             try {
@@ -96,26 +100,26 @@ const Transactions = () => {
     return (
         <div className="max-w-470 flex">
                 <Sidebar urlLocation={location.pathname} />
-            <div className="flex flex-col w-full items-center p-7">
+            <div className="flex flex-col w-full items-center py-7 px-10 max-[520px]:px-1">
                 <main className="flex flex-col w-full gap-7">
-                    <section className="flex justify-between ml-7">
+                    <section className="flex justify-between ml-7 flex-wrap">
                         <div className="flex flex-col">
                             <div className="flex items-center gap-3">
                                 <LuArrowLeftRight className="text-4xl text-[#00C9F2]" />
-                                <h2 className="text-4xl font-extrabold">Transações</h2>
+                                <h2 className="text-4xl max-[310px]:text-3xl font-extrabold">Transações</h2>
                             </div>
-                            <p className="ml-13 text-[13px] text-gray-400">Gerencie suas entradas e saidas, mantenha o controle do seu dinheiro</p>
+                            <p className="ml-13 text-[13px] max-[310px]:text-[12px] text-gray-400">Gerencie suas entradas e saidas, mantenha o controle do seu dinheiro</p>
                         </div>
                         <div>
-                            <Button onClick={() => navigate('/transacoes/nova')} className="rounded-xl"><LuPlus className="mr-1 text-xl font-bold" />Nova transação</Button>
+                            <Button onClick={handleButton} className="rounded-xl mt-5"><LuPlus className="mr-1 text-xl font-bold" />Nova transação</Button>
                         </div>
                     </section>
 
-                    <section className="flex gap-4 justify-center">
+                    <section className="flex gap-4 justify-center flex-wrap">
                         <Card hover
                             icon={<LuWallet className="icon-dashboard-card text-primary-500" />}
                             title="Saldo Atual"
-                            className="h-30 justify-start gap-5 px-10"
+                            className="justify-start gap-5 px-10"
                         >
                             <h2 className={`my-2 text-xl
                                 ${summary.balance >= 0 ? 'text-primary-500' : 'text-red-800'}
@@ -127,7 +131,7 @@ const Transactions = () => {
                         <Card hover
                             icon={<LuArrowDown className="icon-dashboard-card text-red-600" />}
                             title="Despesas"
-                            className="h-30 justify-start gap-5 px-10"
+                            className="justify-start gap-5 px-10"
                         >
                             <h2 className={`my-2 text-xl
                                 ${summary.totalExpenses < 0 ? 'text-primary-500' : 'text-red-800'}
@@ -139,7 +143,7 @@ const Transactions = () => {
                         <Card hover
                             icon={<FaArrowUp className="icon-dashboard-card text-primary-600" />}
                             title="Receitas"
-                            className="h-30 justify-start gap-5 px-10"
+                            className="justify-start gap-5 px-10"
                         >
                             <h2 className={`my-2 text-xl
                                 ${summary.totalIncomes >= 0 ? 'text-primary-500' : 'text-red-800'}
@@ -149,9 +153,9 @@ const Transactions = () => {
                         </Card>
                     </section>
 
-                    <section className="flex justify-between border border-[#075985] bg-[#031727] h-22 rounded-2xl pl-10 pr-3 items-center">
+                    <section className="flex max-[820px]:flex-col justify-between max-[820px]:items-start border border-[#075985] bg-[#031727] h-22 max-[820px]:h-30 rounded-2xl pl-10 max-[414px]:pl-5 pr-3 max-[820px]:py-2 items-center">
                         <div className="flex items-center gap-3">
-                            <div className="ml-9">
+                            <div className="ml-9 max-[380px]:ml-0">
                                 <MonthYearSelect 
                                 month={month} 
                                 onMonthChange={setMonth} 
@@ -159,7 +163,7 @@ const Transactions = () => {
                                 year={year} />
                             </div>
                         </div>
-                        <div className="w-90">
+                        <div className="w-90 max-[520px]:w-auto max-[380px]:pl-0">
                             <Input 
                             fullWidth
                             placeholder='Buscar transações...' 
@@ -185,9 +189,9 @@ const Transactions = () => {
                             </div>
                         ) : transactions.length === 0 ? (
                             <div className="flex flex-col justify-center items-center h-full py-12">
-                                <p className="text-gray-500 mb-4 text-xl">Nenhuma transação encontrada</p>
+                                <p className="text-gray-500 mb-4 text-center text-xl">Nenhuma transação encontrada</p>
                                 <div>
-                                    <Button onClick={() => navigate('/transacoes/nova')} className="rounded-xl"><LuPlus className="mr-1 text-xl font-bold" />Nova transação</Button>
+                                    <Button onClick={handleButton} className="rounded-xl"><LuPlus className="mr-1 text-xl font-bold" />Nova transação</Button>
                                 </div>
                             </div>
                         ) : 
@@ -288,8 +292,10 @@ const Transactions = () => {
                         </div>
                         }
                     </section>
+                     {isActive && <TransactionsForm active={isActive} deactivate={() => setIsActive(false)}/>}
                 </main>
             </div>
+           
         </div>
     );
 };

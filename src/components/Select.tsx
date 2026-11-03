@@ -41,7 +41,7 @@ const Select = ({ label, error, icon, fullWidth = false, options, ...props }: Se
                         aria-label="Seta para selecionar mês" />
                     
                     <select id={selectId} {...props} className={`
-                        bg-[#031727] border pl-8.5 hover:opacity-50 text-[15px]
+                        bg-[#04131f] border pl-8.5 hover:opacity-50 text-[15px]
                         cursor-pointer w-full rounded-xl p-2 mr-3 focus:outline-none 
                         focus:ring-0 appearance-none ${error ? 'border-e-red-600' : 'border-[#075985]'}
                         `}>

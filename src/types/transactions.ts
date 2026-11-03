@@ -1,9 +1,11 @@
 import type { Category, CategorySummary } from "./category";
 
-export enum TransactionType {
-    income = 'income',
-    expense = 'expense',
-};
+export const TransactionType = {
+    income: 'income',
+    expense: 'expense',
+} as const;
+
+export type TransactionType = typeof TransactionType[keyof typeof TransactionType];
 
 export interface Transaction {
     id: string;
@@ -16,6 +18,14 @@ export interface Transaction {
     type: TransactionType;
     updatedAt: string | Date;
     createdAt: string | Date;
+};
+
+export interface CreateTransactionDTO {
+    description: string;
+    amount: number;
+    date: string | Date;
+    categoryId: string;
+    type: TransactionType;
 };
 
 export interface TransactionFilter {

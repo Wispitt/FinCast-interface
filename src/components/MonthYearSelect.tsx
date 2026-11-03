@@ -47,11 +47,11 @@ const MonthYearSelect = ({ month, onMonthChange, onYearChange, year }: MonthYear
     };
  
     return (
-        <div className="relative flex border p-6 border-[#075985] bg-[#031727] rounded-xl items-center h-10 w-60 pl-4 pr-1 mr-10 justify-center ">
+        <div className="relative flex  border p-6 border-[#075985] bg-[#031727] rounded-xl items-center h-10 w-60 pl-4 pr-1 mr-10 justify-center ">
             <button 
             type="button" 
             onClick={handlePrevMonth} 
-            className="absolute cursor-pointer -left-13 rounded-lg text-3xl flex items-center justify-center bg-[#031727] hover:opacity-80 text-gray-400 transition-colors"
+            className="absolute cursor-pointer -left-13 rounded-lg text-3xl flex max-[380px]:hidden items-center justify-center bg-[#031727] hover:opacity-80 text-gray-400 transition-colors"
             aria-label="Botão para selecionar mês anterior"
             >
                 <LuChevronLeft className="border text-3xl h-12 w-10 p-2 cursor-pointer rounded-lg border-[#075985] bg-[#031727]" />
@@ -85,7 +85,7 @@ const MonthYearSelect = ({ month, onMonthChange, onYearChange, year }: MonthYear
             <button 
             type="button" 
             onClick={handleNextMonth} 
-            className="absolute cursor-pointer -right-13 rounded-lg text-3xl flex items-center justify-center bg-[#031727] hover:opacity-80 text-gray-400 transition-colors"
+            className="absolute cursor-pointer -right-13 rounded-lg text-3xl flex max-[380px]:hidden items-center justify-center bg-[#031727] hover:opacity-80 text-gray-400 transition-colors"
             aria-label="Botão para selecionar mês seguinte"
             >
                 <LuChevronRight className="border text-3xl h-12 w-10 p-2 cursor-pointer rounded-lg border-[#075985] bg-[#031727]" />
