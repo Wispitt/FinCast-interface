@@ -136,7 +136,7 @@ const Dashboard = () => {
                     <div className="flex flex-col w-full max-w-150">
                         <div className="w-full max-w-150 h-full max-h-110 rounded-2xl bg-[#031727] p-5 pt-0  max-[500px]:p-0  max-[500px]:pt-10">
 
-                            <div className="w-full h-full px-0.5 relative max-[500px]:h-90">
+                            <div className="w-full px-0.5 relative h-90">
                                 <div className="flex justify-center items-center mb-5 gap-2">
                                     <LuTarget className="icon-dashboard-card text-[#00C9F2]" />
                                     <h3 className="mt-7 text-primary-500 text-xl">Despesas por categoria</h3>

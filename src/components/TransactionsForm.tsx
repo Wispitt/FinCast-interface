@@ -39,6 +39,7 @@ interface ActiveForm {
 const TransactionsForm = ({ active, deactivate }: ActiveForm) => {
     const [categories, setCategories] = useState<Category[]>([]);
     const [formData, setFormData] = useState<FormDate>(initialFormData);
+    const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string>('');
     const formId = useId();
 
@@ -74,6 +75,7 @@ const TransactionsForm = ({ active, deactivate }: ActiveForm) => {
 
     const handleSubmit = async (event: FormEvent): Promise<void> => {
         event.preventDefault();
+        setLoading(true);
         setError('');
 
         try {
@@ -85,7 +87,7 @@ const TransactionsForm = ({ active, deactivate }: ActiveForm) => {
                 amount: Number(formData.amount),
                 categoryId: formData.categoryId,
                 type: formData.type,
-                date: new Date(formData.date).toISOString(),
+                date: `${formData.date}T12:00:00.000Z`,
             };
 
             await createTransaction(transactionData);
@@ -93,6 +95,8 @@ const TransactionsForm = ({ active, deactivate }: ActiveForm) => {
             setFormData(initialFormData);
         } catch {
             toast.error('Falha ao adicionar transação');
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -188,11 +192,19 @@ const TransactionsForm = ({ active, deactivate }: ActiveForm) => {
                                     )}
 
                                     <div className="flex justify-end gap-3 mt-3">
-                                        <Button variant='outline' onClick={closeSideBar}>Cancelar</Button>
-                                        <Button variant={formData.type === TransactionType.expense 
+                                        <Button variant='outline' onClick={closeSideBar} disabled={loading}>Cancelar</Button>
+                                        <Button 
+                                        disabled={loading}
+                                        variant={formData.type === TransactionType.expense 
                                         ? 'danger' : 'success' } 
                                         className="w-35" type="submit">
-                                        <BiSave className="text-xl mr-1" />Salvar</Button>
+                                            {loading ? (
+                                                <span className="inline-block w-5 h-5 border-2 ml-0.5 border-black border-t-transparent rounded-full animate-spin" />
+                                            ) : (
+                                                <BiSave className="text-xl mr-1" />
+                                            )}
+                                        
+                                        {loading ? '' : 'Salvar'} </Button>
                                     </div>
                                 </form>
                             </div>

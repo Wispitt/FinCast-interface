@@ -18,7 +18,7 @@ const Sidebar = ({ urlLocation }: SidebarProps) => {
     };
 
     return (
-        <div className="border-r border-blue-600 w-full max-w-70 max-[1206px]:hidden">
+        <div className="w-full max-w-70 max-[1206px]:hidden">
             <main className="flex flex-col w-full gap-5 px-2 py-5">
                 <div className="flex justify-center items-center w-full">
                     <h3 className="text-center flex items-center text-2xl text-primary-600"><LuTrendingUp className="text-2xl text-primary-600" /> FinCast</h3>
@@ -41,10 +41,6 @@ const Sidebar = ({ urlLocation }: SidebarProps) => {
                     `}><LuPlus className="mr-1 text-xl font-bold" /> Nova transação</button>
 
                     <button className="flex items-center h-10 hover:bg-blue-400 hover:opacity-90 hover:border hover:rounded-2xl cursor-pointer text-xl font-bold px-2"><LuTags className="mr-2" /> Categorias</button>
-                </div>
-
-                <div className="border mt-auto">
-
                 </div>
             </main>
             {isActive && <TransactionsForm active={isActive} deactivate={() => setIsActive(false)}/>}

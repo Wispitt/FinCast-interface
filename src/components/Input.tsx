@@ -15,7 +15,7 @@ const Input = ({ id, label, icon, className, error, fullWidth, ...rest }: InputP
 
     return (
         <div className={`relative ${fullWidth ? 'w-full' : 'w-70' }`}>
-            <div className={`flex items-center gap-3 border bg-[#04131f] h-10 rounded-xl pl-2 focus:ri
+            <div className={`flex items-center gap-3 border bg-[#04131f] hover:border-[#00C9F2] h-10 rounded-xl pl-2 focus:ri focus:bg-[#04131f]
                 ${error ? 'border-red-600' : 'border-blue-600'}
             `}>
                 {label && (
@@ -33,7 +33,11 @@ const Input = ({ id, label, icon, className, error, fullWidth, ...rest }: InputP
                 
                 <input 
                 id={inputId}
-                className={`focus:outline-none text-sm w-full pr-3 transition-all py-2
+                className={`focus:outline-none text-sm w-full pr-3 transition-all 
+                    bg-[#04131f] text-white
+                    [&:-webkit-autofill]:[-webkit-text-fill-color:white]
+                    [&:-webkit-autofill]:bg-[#04131f]
+                    [&:-webkit-autofill]:[transition:background-color_9999s_ease-in-out_0s]
                 ${className}
                 `}
                 {...rest}
