@@ -60,7 +60,7 @@ const Home = () => {
                             acompanhe seus objetivos e construa um futuro mais estável.</p>
                         <Button onClick={() => navigate('/login')} className="w-46 rounded-3xl group ml-5">Começar agora <FaLongArrowAltRight className="ml-2 transition-transform duration-1000 ease-in-out group-hover:translate-x-1.5" /></Button>
                     </div>
-                    <img className="max-w-120 max-[960px]:hidden" src={mainImage} />
+                    <img className="max-w-120 max-[960px]:hidden" src={mainImage} alt="Imagem de transações" />
                 </section>
 
                 <div className="my-15 text-center flex flex-col items-center">

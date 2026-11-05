@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { Pie, ResponsiveContainer, PieChart, Tooltip, LineChart, CartesianGrid, XAxis, YAxis, Legend, Line } from "recharts";
 import {
-    LuUserRound,
     LuWallet,
     LuArrowDown,
     LuTrendingUp,
@@ -84,7 +83,6 @@ const Dashboard = () => {
                         </div>
                         <div className="flex gap-1">
                             <MonthYearSelect year={year} month={month} onMonthChange={setMonth} onYearChange={setYear} />
-                            <button className="bg-[#031727] rounded-full w-10 h-10 ml-5 flex justify-center items-center p-2.5 "><LuUserRound className="text-3xl" /></button>
                         </div>
                     </div>
                     <div className="flex gap-4 justify-center flex-wrap">

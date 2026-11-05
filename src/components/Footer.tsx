@@ -44,7 +44,7 @@ const Footer = () => {
                     <p>Carreiras</p>
                 </div>
 
-                <div className="flex flex-wrap gap-4 w-5 text-gray-500 text-xl ml-5">
+                <div className="flex flex-wrap gap-4 max-w-40 text-gray-500 text-xl ml-5">
                     <FaGithub className="cursor-pointer hover:opacity-70" />
                     <FaInstagram className="cursor-pointer hover:opacity-70" />
                     <FaLinkedin className="cursor-pointer hover:opacity-70" />
