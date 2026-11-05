@@ -53,11 +53,11 @@ body {
 }
 
 .paragraph-app {
-    @apply mt-3 w-62 text-[13px] text-gray-400;
+    @apply mt-3 w-full max-w-62 text-[13px] text-gray-400 max-[390px]:text-xs;
 }
 
 .title-app {
-    @apply font-bold text-white text-xl;
+    @apply font-bold text-white text-xl max-[390px]:text-lg;
 }
 
 .line-after-before {
