@@ -15,7 +15,7 @@ import { formateCurrency } from "../utils/formatters";
 import { currencyPorccentage } from "../utils/formatters";
 import { RechartsDevtools } from "@recharts/devtools";
 import { FaArrowUp } from "react-icons/fa";
-import Sidebar from "../components/SideBar";
+import { Sidebar } from "../components/Sidebar";
 import { useLocation } from "react-router";
 
 const initSummary: TransactionsSummary = {
@@ -137,7 +137,7 @@ const Dashboard = () => {
                             <div className="w-full px-0.5 relative h-90">
                                 <div className="flex justify-center items-center mb-5 gap-2">
                                     <LuTarget className="icon-dashboard-card text-[#00C9F2]" />
-                                    <h3 className="mt-7 text-primary-500 text-xl">Despesas por categoria</h3>
+                                    <h3 className="mt-7 text-primary-500 text-xl font-bold">Despesas por categoria</h3>
                                 </div>
                                 {summary.expensesByCategory.length > 0 ? (
                                     <ResponsiveContainer width="100%" height="80%">
@@ -175,7 +175,7 @@ const Dashboard = () => {
                             <div className="w-full h-120">
                                 <div className="flex justify-center items-center mb-5 gap-2">
                                     <LuTrendingUp className="icon-dashboard-card text-[#00C9F2]" />
-                                    <h3 className="mt-7 text-primary-500 text-xl">Histórico mensal</h3>
+                                    <h3 className="mt-7 text-primary-500 text-xl font-bold">Histórico mensal</h3>
                                 </div>
                                 {monthlyItemsData.length > 0 ? (
                                     <ResponsiveContainer width="100%" height="75%">

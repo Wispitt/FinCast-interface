@@ -13,15 +13,15 @@ const TransactionTypeSelector = ({ value, onChange, id }: TransactionTypeSelecto
             type: TransactionType.expense,
             icon: <FaArrowDown className="text-xl" />,
             label: 'Despesa',
-            activeClasses: 'bg-red-500 border-red-600 text-red-700 font-medium',
-            inativeClasses: 'bg-tranparent border-red-400 text-red-500 hover:bg-red-500 hover:text-red-600 hover:border-red-500',
+            activeClasses: 'bg-red-500 border-red-600 text-red-700 font-bold',
+            inativeClasses: 'bg-tranparent border-red-400 text-red-500 font-bold hover:bg-red-500 hover:text-red-600 hover:border-red-500',
         },
         {
             type: TransactionType.income,
             icon: <FaArrowUp className="text-xl" />,
             label: 'Receita',
-            activeClasses: 'bg-green-500 border-green-500 text-green-700 font-medium',
-            inativeClasses: 'bg-tranparent border-green-600 text-green-700 hover:bg-green-500 hover:text-green-600 hover:border-green-500',
+            activeClasses: 'bg-green-500 border-green-500 text-green-700 font-bold',
+            inativeClasses: 'bg-tranparent border-green-600 text-green-700 font-bold hover:bg-green-500 hover:text-green-600 hover:border-green-500',
         },
     ]
 

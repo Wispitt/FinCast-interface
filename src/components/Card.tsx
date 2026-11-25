@@ -26,9 +26,9 @@ export const Card = ({ children, icon, porcentage = ' ', title, description, cla
               `}>
                 <div className="mb-auto h-20"> {icon} </div>
                 <div className="relative mr-9">
-                  <h4 className="text-[#00C9F2]"> {title} </h4>
+                  <h4 className="text-[#00C9F2] font-bold"> {title} </h4>
                   {children}                          
-                  <p className={`text-[11px] left-15 text-[#00C9F2]
+                  <p className={`text-[11px] left-15 text-[#00C9F2] font-medium
                     ${porcentage >= '0' ? 'text-primary-500' : 'text-red-600'}
                     `}>  {porcentage} {description} </p>
                 </div>

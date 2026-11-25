@@ -49,7 +49,7 @@ const Header = () => {
     return (
         <header className="border-b border-blue-600">
             <div className="py-3 px-5 max-[660px]:pr-0 flex justify-between items-center">
-                <Link to='/' className="flex gap-1 justify-start text-3xl max-[710px]:text-xl ">
+                <Link to='/' className="flex gap-1 justify-start text-3xl ">
                     <FiActivity className="text-[#00C9F2]" />
                     <h1 className="flex text-gray-100 font-bold"
                     >Fin
@@ -58,14 +58,15 @@ const Header = () => {
 
                 {isAuthenticated && (
                     <nav className="flex text-lg max-[965px]:text-sm gap-15 max-[965px]:gap-7 max-[660px]:hidden text-gray-200">
-                        <Link to='/dashboard' className={`flex items-center gap-1 hover:text-[#00C9F2]
+                        <Link to='/dashboard' className={`flex items-center gap-1 font-medium hover:text-[#00C9F2]
                             ${pathname === '/dashboard' ? 'border-b-2 border-[#00C9F2] text-[#00C9F2]' : ''}`}
                             ><LuLayoutDashboard className="text-xl max-[480px]:hidden" />Dashboard</Link>
 
-                        <Link to='/transacoes' className={`flex items-center gap-1 hover:text-[#00C9F2]
+                        <Link to='/transacoes' className={`flex items-center gap-1 font-medium hover:text-[#00C9F2]
                             ${pathname === '/transacoes' ? 'border-b-2 border-[#00C9F2] text-[#00C9F2]' : ''}`}
                             ><LuArrowLeftRight className="text-xl max-[480px]:hidden" />Transações</Link>
-                        <Link to='/categorias' className={`flex items-center gap-1 hover:text-[#00C9F2]
+
+                        <Link to='/categorias' className={`flex items-center gap-1 font-medium hover:text-[#00C9F2]
                             ${pathname === '/categorias' ? 'border-b-2 border-[#00C9F2] text-[#00C9F2]' : ''}`}
                             ><LuTags className="text-[23px] max-[480px]:hidden" />Categorias</Link>
                     </nav> 
@@ -75,7 +76,7 @@ const Header = () => {
                     <div className="flex gap-2 item items-center max-[660px]:hidden">
                         {renderAvatar()}
                         <p className="text-sm font-medium max-[840px]:hidden max-[660px]:flex"> Olá, 
-                            <span className="text-[#00C9F2]"> {authState.user?.displayName}! </span> </p>
+                            <span className="text-[#00C9F2] font-bold"> {authState.user?.displayName}! </span> </p>
                         <Link onClick={signOutUser} to='/'>
                             <LuLogOut className="ml-3 text-gray-400 hover:text-red-500 hover:opacity-80 cursor-pointer" />
                         </Link>

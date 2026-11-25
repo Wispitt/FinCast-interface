@@ -3,7 +3,7 @@ import Button from "../components/Button";
 import { Card } from "../components/Card";
 import MonthYearSelect from "../components/MonthYearSelect";
 import { FaArrowUp } from "react-icons/fa";
-import Sidebar from "../components/SideBar";
+import { Sidebar } from "../components/Sidebar";
 import { useLocation } from "react-router";
 import { useEffect, useState, type ChangeEvent } from "react";
 import Input from "../components/Input";

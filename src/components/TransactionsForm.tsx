@@ -39,7 +39,7 @@ interface ActiveForm {
 const TransactionsForm = ({ active, deactivate }: ActiveForm) => {
     const [categories, setCategories] = useState<Category[]>([]);
     const [formData, setFormData] = useState<FormDate>(initialFormData);
-    const [loading, setLoading] = useState<boolean>(true);
+    const [loading, setLoading] = useState<boolean>(false);
     const [error, setError] = useState<string>('');
     const formId = useId();
 
